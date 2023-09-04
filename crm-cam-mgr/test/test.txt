@@ -1,0 +1,229 @@
+
+查询活动信息
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/fetch?campaign_id=60001"
+{"code":0,"msg":"ok","data":{"campaign_id":60001,"campaign_name":"抽奖手动设置概率","campaign_code":"cam_crm_60001","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"probability":0.5,"qty":5,"is_default":false},{"order":2,"name":"积分","prize_no":"0002","type":2,"goods_info":{"action_scene":"积分累积场景值","points":20},"probability":0.3,"qty":5,"is_default":false},{"order":2,"name":"谢谢惠顾","prize_no":"0003","type":3,"probability":0.2,"qty":5,"is_default":true}]},"campaign_path":"https://test.html","status":true,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:39:07"}}
+
+
+
+创建活动信息
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/create" -d '
+{
+    "campaign_name": "情人节活动",
+    "campaign_type": 101,
+    "begin_time": "2022-07-01",
+    "end_time": "2023-07-01"
+}
+'
+
+
+搜索活动信息
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/search?keyword=%E6%83%85%E4%BA%BA"
+
+
+删除活动信息
+curl -d '{"campaign_id":60012}' "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/remove"
+
+
+更新活动信息
+725测试
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{
+    "campaign_id": 60003,
+    "campaign_name": "签到连续送积分和卡券",
+    "begin_time": "2022-07-01 00:00:00",
+    "end_time": "2023-07-01 00:00:00",
+    "campaign_path": "https://dev.quickshark.cn/",
+    "detail": {
+        "signin_way": 1,
+        "prize_conf": {
+            "type": 2,
+            "goods_info": {
+                "rule_id": 8,
+                "points": 123
+            },
+            "signin_days": 12
+        }
+    }
+}
+'
+
+
+不支持修改活动类型
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{
+    "campaign_id":60012,
+    "campaign_name": "情人节活动123",
+    "campaign_type": -1,
+    "begin_time": '2022-07-01',
+    "end_time": '2023-07-01'
+    "detail": {"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":100},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]},"probability":0.5,"qty":100,"is_default":false},{"order":2,"name":"20积分","prize_no":"0002","type":2,"goods_info":{"rule_id":7,"points":20},"probability":0.3,"qty":100,"is_default":false},{"order":3,"name":"谢谢惠顾","prize_no":"0003","type":3,"probability":0.2,"qty":5,"is_default":true}]},
+    "campaign_path": "https://dev.quickshark.cn/"
+}
+'
+抽奖手动设置概率
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60001,"campaign_name":"抽奖手动设置概率","begin_time":"2022-07-01","end_time":"2023-07-01",
+"detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":101},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]},"probability":0.5,"qty":100,"is_default":false},{"order":2,"name":"20积分","prize_no":"0002","type":2,"goods_info":{"rule_id":7,"points":20},"probability":0.3,"qty":100,"is_default":false},{"order":3,"name":"谢谢惠顾","prize_no":"0003","type":3,"probability":0.2,"qty":5,"is_default":true}]},"campaign_path":"https://dev.quickshark.cn/"}
+'
+
+抽奖库存设置概率
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60002,"campaign_name":"抽奖手动设置概率","begin_time":"2022-07-01","end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"lottery_way":1,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"qty":100,"is_default":false},{"order":2,"name":"积分","type":2,"goods_info":{"rule_id":123,"points":20},"qty":100,"is_default":false},{"order":2,"name":"谢谢惠顾","type":3,"qty":100,"is_default":true}]}
+}
+'
+
+
+签到连续送积分和卡券
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60003,"campaign_name":"签到连续送积分和卡券","begin_time":"2022-07-01","end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"signin_way":1,"prize_conf":[{"signin_days":4,"item":[{"type":1,"goods_info":{"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]}}]}],"sms_content":{"platform":"tc3","account_id":"123","template_id":"456"}}
+}
+'
+
+
+发券活动页在人群包
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60004,"campaign_name":"发券活动页在人群包","begin_time":"2022-07-01","end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":1,"people_ids":[1],"goods_info":{"coupon_type":1,"coupon_list":["JEDTGWYYZ7BNKJB765FKOG"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}}
+'
+
+
+发券活动页不在人群包
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60005,"campaign_name":"发券活动页不在人群包","begin_time":"2022-07-01","end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":1,"people_ids":[2],"goods_info":{"coupon_type":1,"coupon_list":["JEDTGWYYZ7BNKJB765FKOG"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+
+
+发券活动页标签包含并且
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60006,
+"campaign_name":"发券活动页标签包含并且",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":2,"tag_condition":{"crm_id":10080,"cdp_id":10087,"includes":{"op":"and","expr":[{"tag_type":1,"tag_id":20069,"tag_bind_field":"tag_001","tag_name":"标签名称","level_id":601917,"level_name":"级别名称"},{"tag_type":1,"tag_id":20070,"tag_bind_field":"tag_002","tag_name":"标签名称","level_id":601918,"level_name":"级别名称"}]},"excludes":{}},"goods_info":{"coupon_type":1,"coupon_list":["1201310000000116"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+发券活动页标签包含或者
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60007,
+"campaign_name":"发券活动页标签包含或者",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":2,"tag_condition":{"crm_id":10080,"cdp_id":10087,"includes":{"op":"or","expr":[{"tag_type":1,"tag_id":20069,"tag_bind_field":"tag_003","tag_name":"标签名称","level_id":601917,"level_name":"级别名称"},{"tag_type":1,"tag_id":20070,"tag_bind_field":"tag_004","tag_name":"标签名称","level_id":601918,"level_name":"级别名称"}]},"excludes":{}},"goods_info":{"coupon_type":1,"coupon_list":["1201310000000116"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+
+发券活动页标签不包含并且
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60008,
+"campaign_name":"发券活动页标签不包含并且",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"campaign_child_no":"18位编码","start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":2,"tag_condition":{"crm_id":10080,"cdp_id":10087,"includes":{},"excludes":{"op":"and","expr":[{"tag_type":1,"tag_id":20069,"tag_bind_field":"tag_001","tag_name":"标签名称","level_id":601917,"level_name":"级别名称"},{"tag_type":1,"tag_id":20070,"tag_bind_field":"tag_002","tag_name":"标签名称","level_id":601918,"level_name":"级别名称"}]}},"goods_info":{"coupon_type":1,"coupon_list":["1201310000000116"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+
+发券活动页标签不包含或者
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60009,
+"campaign_name":"发券活动页标签不包含或者",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"campaign_child_no":"18位编码","start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","target_type":2,"tag_condition":{"crm_id":10080,"cdp_id":10087,"includes":{},"excludes":{"op":"or","expr":[{"tag_type":1,"tag_id":20069,"tag_bind_field":"tag_003","tag_name":"标签名称","level_id":601917,"level_name":"级别名称"},{"tag_type":1,"tag_id":20070,"tag_bind_field":"tag_004","tag_name":"标签名称","level_id":601918,"level_name":"级别名称"}]}},"goods_info":{"coupon_type":1,"coupon_list":["1201310000000116"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+
+
+发券活动页商家券
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60010,
+"campaign_name":"发券活动页商家券",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","goods_info":{"coupon_type":2,"coupon_list":["1201310000000116","1201310000000115","1201310000000114"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+
+发券活动页自制券
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{"campaign_id":60011,
+"campaign_name":"发券活动页自制券",
+"begin_time":"2022-07-01",
+"end_time":"2023-07-01",
+"campaign_path":"https://dev.quickshark.cn/",
+"detail":
+{"children":[{"start_time":"2022-06-10 00:00:00","end_time":"2023-06-23 00:00:00","campaign_path":"https://xxx","goods_info":{"coupon_type":1,"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]},"wsm_imporve":{"guider":[],"fans":[],"sop":[]}}]}
+}
+'
+
+更新活动信息
+开启活动
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/campaign/update" -d '
+{
+    "campaign_id":60011,
+    "status":1
+}
+'
+
+
+查询活动日历
+curl "https://dev.quickshark.cn/api/crm/mgr/cam/calendar/month?year=2022&month=07"
+
+
+查询活动数据
+curl  "https://dev.quickshark.cn/mn/api/cam/mgr/campaign/common/list"  -d '
+{
+    "member_no":"M220704308572703018",
+    "create_start": "2022-07-20 00:00:00",
+    "create_end": "2022-08-20 00:00:00",
+    "page_size":5,
+    "page_id":1,
+    "order_by": "create_time",
+    "order_asc": 1
+}
+'
+
+curl  "https://dev.quickshark.cn/mn/api/cam/mgr/campaign/common/list"  -d '
+{
+    "update_start": "2022-07-20 00:00:00",
+    "update_end": "2022-08-20 00:00:00"
+}
+'
+
+
+curl  "https://dev.quickshark.cn/mn/api/cam/mgr/campaign/common/list"  -d '
+{
+    "member_no":"M220704308572703018"
+}
+'
+
+
+curl -F 'type=1' -F "file=@member_no.xlsx" "https://dev.quickshark.cn/api/crm/mgr/cam/people/file_upload"
+

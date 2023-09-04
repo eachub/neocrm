@@ -1,0 +1,18 @@
+#!/bin/bash
+
+### Add to crontab: 30-minutes
+### */30 * * * * bash /opt/soft/semir-ecom-website/t_goods_spider.cron prod
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 env"
+  exit 1
+fi
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PROJPATH=$(cd `dirname $0` && pwd)
+DTSTAMP=`date +"%Y%m%d"`
+FROMTIME=`date  -d "5 minute ago"  +"%Y%m%d%H%M%S"`
+
+cd "${PROJPATH}"
+
+python3 "${PROJPATH}/t_goods_spider.py" --stamp=${FROMTIME} --env=$1 >> ${PROJPATH}/logs/web-goods-${DTSTAMP}.log

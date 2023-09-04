@@ -1,0 +1,24 @@
+#!/bin/bash
+
+### Add to crontab: 1 days
+### 10 0 * * * bash /opt/soft/eros-crm-mgr/tasks/t_crm_coupon_expired.cron test
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 env"
+  exit 1
+fi
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PYTHONPATH=`cat $HOME/.path_microkit`:$PYTHONPATH
+
+PROJPATH=$(cd `dirname $0` && pwd)
+DTSTAMP=`date +"%Y%m%d"`
+EXPIRED=`date -d "15 day ago" +"%Y%m%d"`
+sleep 5
+
+
+cd "${PROJPATH}"
+
+python3 "${PROJPATH}/t_crm_coupon_expired_task.py" --env=$1 >> /tmp/points-tasks-${DTSTAMP}.log  2>&1 &
+
+\rm -f /tmp/points-tasks-${EXPIRED}.log

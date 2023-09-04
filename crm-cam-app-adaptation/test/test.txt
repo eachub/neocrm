@@ -1,0 +1,55 @@
+
+查询活动信息
+curl --header "X-EACH-SESSION-ID:a280b3b1-58a0-4afd-9bf2-8ebb8d4c8437"  "https://dev.quickshark.cn/api/crm/cam/campaign/fetch?campaign_id=60001"
+非会员：{"code":0,"msg":"ok","data":{"campaign_id":60001,"campaign_name":"\u62bd\u5956\u624b\u52a8\u8bbe\u7f6e\u6982\u7387","campaign_code":"cam_crm_60001","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"\u4e70\u4e00\u9001\u4e00","prize_no":"0001","type":1},{"order":2,"name":"\u79ef\u5206","prize_no":"0002","type":2},{"order":2,"name":"\u8c22\u8c22\u60e0\u987e","prize_no":"0003","type":3}]},"campaign_path":"https://test.html","status":1,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:39:07","is_member":0}}
+会员：{"code":0,"msg":"ok","data":{"campaign_id":60001,"campaign_name":"\u62bd\u5956\u624b\u52a8\u8bbe\u7f6e\u6982\u7387","campaign_code":"cam_crm_60001","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"\u4e70\u4e00\u9001\u4e00","prize_no":"0001","type":1},{"order":2,"name":"\u79ef\u5206","prize_no":"0002","type":2},{"order":2,"name":"\u8c22\u8c22\u60e0\u987e","prize_no":"0003","type":3}]},"campaign_path":"https://test.html","status":1,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:39:07","is_member":1}}
+
+查询活动信息返回剩余次数：{"code":0,"msg":"ok","data":{"campaign_id":60001,"campaign_name":"\u62bd\u5956\u624b\u52a8\u8bbe\u7f6e\u6982\u7387","campaign_code":"cam_crm_60001","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"\u4e70\u4e00\u9001\u4e00","prize_no":"0001","type":1},{"order":2,"name":"\u79ef\u5206","prize_no":"0002","type":2},{"order":2,"name":"\u8c22\u8c22\u60e0\u987e","prize_no":"0003","type":3}]},"campaign_path":"https://test.html","status":1,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:39:07","is_member":1,"plugin":{"remain_times":10}}}
+
+查询活动信息
+curl "http://127.0.0.1:21500/api/cam/campaign/neo_instance_id/fetch?campaign_id=60002"
+{"code":0,"msg":"ok","data":{"campaign_id":60002,"campaign_name":"抽奖库存设置概率","campaign_code":"cam_crm_60002","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":1,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"qty":100,"is_default":false},{"order":2,"name":"积分","prize_no":"0002","type":2,"goods_info":{"action_scene":"积分累积场景值","points":20},"qty":100,"is_default":false},{"order":2,"name":"谢谢惠顾","prize_no":"0003","type":3,"qty":100,"is_default":true}]},"campaign_path":"https://test.html","status":true,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:40:46"}}
+
+抽奖
+curl --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "http://127.0.0.1:21500/api/crm/cam/campaign/lucky_draw?campaign_id=60001"
+
+查询抽奖活动信息
+curl --header "X-EACH-SESSION-ID:d402aa2b-f698-41ca-a75a-0feebc0b9359"  "http://127.0.0.1:21500/api/crm/cam/campaign/fetch?campaign_id=60001"
+
+抽奖
+curl --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/lucky_draw?campaign_id=60001"
+
+
+查询签到活动信息
+curl --header "X-EACH-SESSION-ID:aca75e3a-5d9e-4142-aedc-4bf1084898c6"  "https://dev.quickshark.cn/api/crm/cam/campaign/fetch?campaign_id=60003"
+
+
+
+我的奖品
+curl --header "X-EACH-SESSION-ID:2d7104ff-b02a-47b0-ab47-4af322e30a5e"  "https://dev.quickshark.cn/api/crm/cam/campaign/fetch_my_bag?campaign_id=60001"
+
+
+查询日历
+curl --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/fetch_my_calendar?campaign_id=60003"
+
+签到
+curl -d '{"campaign_id":60003,"utm_source":"cam123"}'  --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/signin"
+
+查询领券活动页商家券
+curl --header "X-EACH-SESSION-ID:a280b3b1-58a0-4afd-9bf2-8ebb8d4c8437"  "https://dev.quickshark.cn/api/crm/cam/campaign/fetch?campaign_id=60010"
+
+查询领券活动页自制券
+curl --header "X-EACH-SESSION-ID:a280b3b1-58a0-4afd-9bf2-8ebb8d4c8437"  "http://127.0.0.1:21500/api/crm/cam/campaign/fetch?campaign_id=60011"
+
+
+领取自制券
+curl -d '{"campaign_id":60011,"utm_source":"cam123","campaign_child_no":"18位编码"}'  --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/receive_card_page"
+
+
+
+领取成功商家券
+curl -d '{"campaign_id":60003,"utm_source":"cam123"}'  --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/receive_card_page"
+
+
+计算公众号打开H5签名
+curl --header "X-EACH-SESSION-ID:4289bb21-f80b-4fa6-8613-23848f62bb54"  "https://dev.quickshark.cn/api/crm/cam/campaign/get_woa_sign?url=https%3A%2F%2Fwww.baidu.com%2F"

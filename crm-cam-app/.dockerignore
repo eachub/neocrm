@@ -1,0 +1,13 @@
+.git*
+**/*.log
+**/log
+**/logs/
+
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+build/
+
+.docker*
+docker.sh
+Dockerfile

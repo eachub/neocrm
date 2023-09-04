@@ -1,0 +1,26 @@
+#!/bin/bash
+
+### Add to crontab: 1-minutes
+### * * * * * bash /opt/soft/eros-crm-mgr/t_stat_worker.cron prod
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 env"
+  exit 1
+fi
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PYTHONPATH=`cat $HOME/.path_microkit`:$PYTHONPATH
+
+PROJPATH=$(cd `dirname $0` && pwd)
+DTSTAMP=`date +"%Y%m%d"`
+EXPIRED=`date -d "15 day ago" +"%Y%m%d"`
+sleep 5
+FROMDATE=`date -d "1 minute ago" +"%Y-%m-%d"`
+FROMHOUR=`date -d "1 minute ago" +"%H"`
+
+cd "${PROJPATH}"
+
+python3 "${PROJPATH}/t_stat_worker.py" --env=$1 --from-date=${FROMDATE} --from-hour=${FROMHOUR} >> /tmp/crm-stat-${DTSTAMP}.log  2>&1
+python3 "${PROJPATH}/t_stat_worker.py" --env=$1 --from-date=${FROMDATE} >> /tmp/crm-stat-${DTSTAMP}.log  2>&1
+
+\rm -f /tmp/crm-stat-${EXPIRED}.log

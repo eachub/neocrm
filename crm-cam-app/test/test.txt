@@ -1,0 +1,93 @@
+
+查询活动信息
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch?campaign_id=60001"
+{"code":0,"msg":"ok","data":{"campaign_id":60001,"campaign_name":"抽奖手动设置概率","campaign_code":"cam_crm_60001","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":2,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"probability":0.5,"qty":5,"is_default":false},{"order":2,"name":"积分","prize_no":"0002","type":2,"goods_info":{"action_scene":"积分累积场景值","points":20},"probability":0.3,"qty":5,"is_default":false},{"order":2,"name":"谢谢惠顾","prize_no":"0003","type":3,"probability":0.2,"qty":5,"is_default":true}]},"campaign_path":"https://test.html","status":true,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:39:07"}}
+
+查询活动信息
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch?campaign_id=60002"
+{"code":0,"msg":"ok","data":{"campaign_id":60002,"campaign_name":"抽奖库存设置概率","campaign_code":"cam_crm_60002","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":1,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"qty":100,"is_default":false},{"order":2,"name":"积分","prize_no":"0002","type":2,"goods_info":{"action_scene":"积分累积场景值","points":20},"qty":100,"is_default":false},{"order":2,"name":"谢谢惠顾","prize_no":"0003","type":3,"qty":100,"is_default":true}]},"campaign_path":"https://test.html","status":true,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:40:46"}}
+
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch?campaign_id=60059"
+
+
+
+
+
+查询活动剩余次数
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_remain_times?campaign_id=60001&member_no=M220704308572703018"
+{"code":0,"msg":"ok","data":{"campaign_id":60002,"campaign_name":"抽奖库存设置概率","campaign_code":"cam_crm_60002","campaign_type":102,"begin_time":"2022-07-10 00:00:00","end_time":"2023-07-10 00:00:00","detail":{"lottery_way":1,"lottery_schedule":{"interval":"day","schedule_times":10},"lottery_consume":{"points":12},"lottery_item":[{"order":1,"name":"买一送一","prize_no":"0001","type":1,"goods_info":{"coupon_list":["coupon_10001"]},"qty":100,"is_default":false},{"order":2,"name":"积分","prize_no":"0002","type":2,"goods_info":{"action_scene":"积分累积场景值","points":20},"qty":100,"is_default":false},{"order":2,"name":"谢谢惠顾","prize_no":"0003","type":3,"qty":100,"is_default":true}]},"campaign_path":"https://test.html","status":true,"create_time":"2022-07-10 16:35:47","update_time":"2022-07-10 16:40:46"}}
+
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_remain_times?campaign_id=60059&member_no=M220704308572703018"
+
+
+锁定抽奖次数
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/lock_lucky_draw?campaign_id=60001&member_no=M220704308572703018"
+{"code":0,"msg":"ok","data":{"points":12,"remain_times":2}}
+
+解除抽奖次数
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/unlock_lucky_draw?campaign_id=60001&member_no=M220704308572703018"
+{"code":0,"msg":"ok","data":{"remain_times":10}}
+
+抽奖
+curl -d '{"campaign_id":60001,"member_no":"M220704308572703018"}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/lucky_draw"
+{"code":0,"msg":"ok","data":{"remain_times":10}}
+
+
+查询我的奖品
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_my_prize?campaign_id=60001&member_no=M220704308572703018"
+{"code":0,"msg":"ok","data":[{"prize_type":2,"prize_name":"积分","create_time":"2022-07-13 15:21:27"}]}
+
+
+查询活动日历
+curl "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_my_calendar?campaign_id=60003&member_no=M220704308572703018"
+{"code":0,"msg":"ok","data":[{"prize_type":2,"prize_name":"积分","create_time":"2022-07-13 15:21:27"}]}
+
+
+签到
+curl -d '{"campaign_id":60003,"member_no":"M220704308572703018"}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/signin"
+
+
+人群包包含查询发券活动
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60004&member_no=M220704308572703018"
+
+
+人群包不包含查询发券活动
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60004&member_no=M220704308572703019"
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60005&member_no=M220704308572703018"
+
+
+标签包含并且
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60006&member_no=M220704308572703018"
+
+标签包含或者
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60007&member_no=M220704308572703018"
+
+标签不包含并且
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60008&member_no=M220704308572703018"
+
+标签不包含或者
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60009&member_no=M220704308572703018"
+
+发送商家券
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60010&member_no=M220704308572703018"
+
+发送自制券
+curl  "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/fetch_card_page?campaign_id=60011&member_no=M220704308572703018"
+
+领取自制券
+curl -d '{"campaign_id":60011,"campaign_child_no":"ZzopgGtTNggc529nrBNiP3","member_no":"M220704308572703021"}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/receive_card"
+{"code":0,"data":{"coupon_type":1,"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]}}
+
+补充领取自制券
+curl -d '{"campaign_id":60011,"campaign_child_no":"18位编码","member_no":"M220704308572703019","card_ids":["8WM55SLEJWSEMSQRFKWQ9A"]}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/receive_card"
+{"code":0,"data":{"coupon_type":1,"coupon_list":["JEDTGWYYZ7BNKJB765FKOG","8WM55SLEJWSEMSQRFKWQ9T"]}}
+
+
+领取商家券
+curl -d '{"campaign_id":60010,"campaign_child_no":"18位编码","member_no":"M220704308572703019"}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/receive_card"
+
+补充领取商家券
+curl -d '{"campaign_id":60010,"campaign_child_no":"18位编码","member_no":"M220704308572703019","card_ids":["1201310000000113"]}' "http://127.0.0.1:21400/api/cam/campaign/neo_instance_id/receive_card"
+
+
+f8d9688c-0cc1-4256-aa45-8b701aa16f3d

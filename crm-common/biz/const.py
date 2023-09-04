@@ -1,0 +1,77 @@
+#!/usr/bin/env python3.6
+# -*- coding: utf-8 -*-
+
+class RC:
+    NOT_LOGIN = -1
+    OK = 0
+
+    PARAMS_MISSING = 30400
+    NOT_ALLOWED_NULL = 30401
+    PARAMS_INVALID = 30402
+    FORBIDDEN = 30403
+    DATA_NOT_FOUND = 30404
+    DATA_NOT_UPDATE = 30405
+    DATA_EXIST = 30406
+    PARSER_FAILED = 304067
+    REQUEST_TIMEOUT = 30408
+    SIGNATURE_INVALID = 30415
+    INTERNAL_ERROR = 30500
+    DATA_EXCEPTION = 30503
+
+    HANDLER_ERROR = 30601
+
+    RECEIVE_LIMIT = 40000
+    CODE_LIMIT = 40001
+    DAY_CODE_LIMIT = 40002
+
+    PLATFORM_ERROR = 53004
+
+
+class Error:
+    SUCCESS = 0
+
+    PARAM_ERROR = 504100  # 5041 参数相关的错误
+    MOBILE_ERROR = 504110  # 手机号码错误
+    POINTS_NOT_ENOUGH = 504300  # 可用积分不足
+
+    SOURCE_NOT_FOUND = 504400  # 5044 资源不存在相关的错误
+    MEMBER_NOT_FOUND = 504410  # 会员不存在
+    POINTS_RULE_NOT_FOUND = 504411  # 积分规则不存在
+    EVENT_NOT_FOUND = 504412  # 积分操作不存在
+    CARD_RECEIVE_INFO_NOT_FOUND = 504413  # 卡券领取记录不存在
+    CARD_NOT_FOUND = 504414  # 卡券不存在
+    PRESENT_INFO_NOT_FOUND = 504415  # 赠券记录不存在
+    REDEEM_INFO_NOT_FOUND = 504416  # 核销记录不存在
+    POINTS_IS_NULL = 504417  # 没有积分
+    POINTS_HISTORY_IS_NULL = 504418  # 没有积分操作
+
+    ALREADY_DELETE = 504500  # 已经删除
+
+    DATA_EXCEPTION = 505100  # 5051 数据库出错
+
+    ALREADY_DONE = 506100  # 幂等性操作重复执行
+    FORBIDDING = 506200  # 操作拒绝
+    MOBILE_ALREADY_EXIST = 506300  # 手机号已经被注册
+
+    INNER_ERROR = 600000  # 严重错误
+
+
+class GENDER:
+    UNKNOWN = 0
+    MALE = 1
+    FEMALE = 2
+
+    GENDER_SET = (UNKNOWN, MALE, FEMALE)
+
+
+class CouponError:
+    RECEIVED_FAILED = 60001  # 卡券领取失败
+    RECEIVED_LIMIT = 60002  # 卡券领取超限
+    NO_STOCK = 60003  # 卡券无库存
+    RECEIVE_REVERSE = 60004  # 领取冲正失败
+    PRESENT_FAILED = 60005  # 转赠失败
+    PRESENT_RECEIVED_FAILED = 60006  # 转赠领取失败
+    REDEEM_FAILED = 60007  # 核销失败
+
+
+SUPPORT_PLATFORM = ["wechat", "alipay", "douyin", 'tmall']
